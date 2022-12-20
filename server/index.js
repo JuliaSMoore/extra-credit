@@ -38,10 +38,20 @@ app.get(`/api/character`, (req, res) => {
 });
 
 app.delete(`/api/character/:id`, (req, res) => {
-  const { id } = req.params;
-  const index = character.findIndex((char) => char.id === id);
-  character.splice(index, 1);
-  return res.send();
+  id = +req.params.id;
+  let index;
+  for (let i = 0; i < character.length; i++) {
+    if (character[i].id === id) {
+      index = i;
+    }
+  }
+
+  if (index !== undefined) {
+    character.splice(index, 1);
+    res.status(200).send(character);
+  } else {
+    res.status(400).send("Nothing to delete");
+  }
 });
 
 app.listen(4000, console.log(`The server is running on 4000`));

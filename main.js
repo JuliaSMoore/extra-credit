@@ -44,12 +44,12 @@ const createNewChar = (event) => {
 
 namePower.addEventListener(`submit`, createNewChar);
 
-function deleteChar(id) {
-    id.preventDefault()
-  id === deleteDB.value;
-  return axios.delete(`${baseURL}/api/character/${id}`).then((res) => {
+function deleteChar(event) {
+    event.preventDefault()
+    id = deleteDB.value
+  axios.delete(`${baseURL}/api/character/${id}`).then((res) => {
     res.data;
   });
 }
 
-deleteButton.addEventListener(`submit`, deleteChar);
+deleteForm.addEventListener(`submit`, deleteChar);
